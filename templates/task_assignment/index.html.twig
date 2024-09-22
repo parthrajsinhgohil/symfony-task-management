@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TaskAssignment index{% endblock %}
+
+{% block body %}
+    <h1>TaskAssignment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Task</th>
+                <th>User</th>
+                <th>Created_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task_assignment in task_assignments %}
+            <tr>
+                <td>{{ task_assignment.id }}</td>
+                <td>{{ task_assignment.getTaskId.getTitle }}</td>
+                <td>{{ task_assignment.getUserId.getName }}</td>
+                <td>{{ task_assignment.createdAt ? task_assignment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_task_assignment_show', {'id': task_assignment.id}) }}">show</a>
+                    <a href="{{ path('app_task_assignment_edit', {'id': task_assignment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_task_assignment_new') }}">Create new</a>
+{% endblock %}
