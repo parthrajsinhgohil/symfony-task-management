@@ -5,7 +5,8 @@ $(document).ready(function() {
         const newStatus = $(this).val();
     
         $.ajax({
-            url: 'http://127.0.0.1:8000/update-task-status',
+            // url: 'http://127.0.0.1:8000/update-task-status',
+            url: updateTaskStatusUrl,
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ id: taskId, status: newStatus }),

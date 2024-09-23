@@ -60,5 +60,8 @@
 	</div>
 {% endblock %}
 {% block javascripts %}
+	<script>
+		const updateTaskStatusUrl = "{{ path('update_task_status') }}";
+	</script>
 	{{ encore_entry_script_tags('task_status') }}
 {% endblock %}
