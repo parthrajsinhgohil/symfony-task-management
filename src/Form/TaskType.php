@@ -19,14 +19,14 @@ class TaskType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Task Name',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mt-2 mb-3',
                     'placeholder' => 'Enter Task Name'
                 ],
                 'required' => false,
             ])
             ->add('description', TextareaType::class, [
                 'attr' => [
-                    'class' => 'form-control',                    
+                    'class' => 'form-control mt-2 mb-3',                    
                 ],
                 'required' => false,
             ])

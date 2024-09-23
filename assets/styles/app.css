@@ -1,5 +1,22 @@
 @import '~bootstrap';
+/* @import '~font-awesome'; */
+@import 'font-awesome/css/font-awesome.min.css';
+
 
 body {
     background-color: lightgray;
+}
+.btn-show {
+    background-color: #17a2b8;
+    color: white; 
+}
+.btn-show:hover {
+    background-color: #17a2b8;
+}
+.btn-edit {
+    background-color: #ffc107; 
+    color: white; 
+}
+.btn-edit:hover {
+    background-color: #ffc107;
 }

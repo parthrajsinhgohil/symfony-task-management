@@ -20,8 +20,9 @@ class TaskAssignmentType extends AbstractType
                 'choice_label' => 'title',
                 'placeholder' => 'Select a task',
                 'required' => false,
+                'label' => 'Task',
                 'attr' => [
-                    'class' => 'form-control',                    
+                    'class' => 'form-control mt-2 mb-3',                    
                 ],
             ])
             ->add('user_id', EntityType::class, [
@@ -29,8 +30,9 @@ class TaskAssignmentType extends AbstractType
                 'choice_label' => 'name',
                 'placeholder' => 'Select a User',
                 'required' => false,
+                'label' => 'User',
                 'attr' => [
-                    'class' => 'form-control',                    
+                    'class' => 'form-control mt-2 mb-3',                    
                 ],
             ])
             // ->add('user_id', EntityType::class, [

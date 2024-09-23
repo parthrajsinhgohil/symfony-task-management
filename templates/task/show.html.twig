@@ -1,42 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Task{% endblock %}
+{% block title %}Task
+{% endblock %}
 
 {% block body %}
-    <h1>Task</h1>
+	<div class="card mt-5">
+		<div class="card-header">
+			Task
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ task.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ task.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ task.description }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ task.status.value }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Updated_at</th>
-                <td>{{ task.updatedAt ? task.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_task_index') }}">back to list</a>
-
-    <a href="{{ path('app_task_edit', {'id': task.id}) }}">edit</a>
-
-    {{ include('task/_delete_form.html.twig') }}
+			<div style="float: right;" class="d-flex">
+				{{ include('task/_delete_form.html.twig') }}
+				<a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-sm btn-primary" style="margin-left: 10px;"><i class="fa fa-edit"></i></a>
+				<a href="{{ path('app_task_index') }}" class="btn btn-sm btn-warning" style="margin-left: 10px;color:white;">back to list</a>
+			</div>
+		</div>
+		<div class="card-body">
+			<table class="table">
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <td>{{ task.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>{{ task.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ task.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>{{ task.status.value }}</td>
+                    </tr>
+                    <tr>
+                        <th>Created Time</th>
+                        <td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Updated Time</th>
+                        <td>{{ task.updatedAt ? task.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+		</div>
+	</div>
 {% endblock %}
+
