@@ -29,8 +29,23 @@ class AssignedTaskValidator extends ConstraintValidator
             return; // Skip this validation if there are existing violations
         }
 
-        $existingEntity = $this->entityManager->getRepository(TaskAssignment::class)
-            ->findOneBy(['task' => $value]);
+        $entity = $this->context->getObject();
+
+        if($entity->getId()) {
+            $id = $entity->getId();
+            
+            $existingEntity = $this->entityManager->getRepository(TaskAssignment::class)
+                ->createQueryBuilder('ta')
+                ->where('ta.task = :task')            
+                ->andWhere('ta.id != :id') // Exclude the current entity by ID
+                ->setParameter('task', $value)            
+                ->setParameter('id', $id)
+                ->getQuery()
+                ->getOneOrNullResult();
+        } else {
+            $existingEntity = $this->entityManager->getRepository(TaskAssignment::class)
+                ->findOneBy(['task' => $value]);
+        }
 
         if($existingEntity) {
             $existingId = (string) $existingEntity->getTask()->getTitle();
@@ -39,8 +54,6 @@ class AssignedTaskValidator extends ConstraintValidator
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $existingId)
                 ->addViolation();
-
-            return;
         }
     }
 }
