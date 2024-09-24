@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TaskAssignmentRepository::class)]
 #[UniqueEntity(
-    fields: ['task_id', 'user_id'], 
+    fields: ['task', 'user'], 
     message: 'This task is already assigned to this user.'
 )]
 class TaskAssignment
@@ -20,15 +20,15 @@ class TaskAssignment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'taskAssignments')]
+    #[ORM\OneToOne(inversedBy: 'taskAssignment')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank(message: 'Task cannot be blank.')]
-    private ?Task $task_id = null;
+    private ?Task $task = null;
 
     #[ORM\ManyToOne(inversedBy: 'taskAssignments')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank(message: 'User cannot be blank.')]
-    private ?User $user_id = null;
+    private ?User $user = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -41,26 +41,26 @@ class TaskAssignment
         return $this->id;
     }
 
-    public function getTaskId(): ?Task
+    public function getTask(): ?Task
     {
-        return $this->task_id;
+        return $this->task;
     }
 
-    public function setTaskId(?Task $task_id): static
+    public function setTask(Task $task): static
     {
-        $this->task_id = $task_id;
+        $this->task = $task;
 
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?User $user_id): static
+    public function setUser(?User $user): static
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }

@@ -32,7 +32,7 @@ class User
     /**
      * @var Collection<int, TaskAssignment>
      */
-    #[ORM\OneToMany(targetEntity: TaskAssignment::class, mappedBy: 'user_id')]
+    #[ORM\OneToMany(targetEntity: TaskAssignment::class, mappedBy: 'user')]
     private Collection $taskAssignments;
 
     public function __construct()
@@ -105,7 +105,7 @@ class User
     {
         if (!$this->taskAssignments->contains($taskAssignment)) {
             $this->taskAssignments->add($taskAssignment);
-            $taskAssignment->setUserId($this);
+            $taskAssignment->setUser($this);
         }
 
         return $this;
@@ -115,8 +115,8 @@ class User
     {
         if ($this->taskAssignments->removeElement($taskAssignment)) {
             // set the owning side to null (unless already changed)
-            if ($taskAssignment->getUserId() === $this) {
-                $taskAssignment->setUserId(null);
+            if ($taskAssignment->getUser() === $this) {
+                $taskAssignment->setUser(null);
             }
         }
 

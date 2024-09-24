@@ -15,7 +15,7 @@ class TaskAssignmentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('task_id', EntityType::class, [
+            ->add('task', EntityType::class, [
                 'class' => Task::class,
                 'choice_label' => 'title',
                 'placeholder' => 'Select a task',
@@ -25,7 +25,7 @@ class TaskAssignmentType extends AbstractType
                     'class' => 'form-control mt-2 mb-3',                    
                 ],
             ])
-            ->add('user_id', EntityType::class, [
+            ->add('user', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Select a User',
@@ -35,17 +35,6 @@ class TaskAssignmentType extends AbstractType
                     'class' => 'form-control mt-2 mb-3',                    
                 ],
             ])
-            // ->add('user_id', EntityType::class, [
-            //     'class' => User::class,
-            //     'choice_label' => 'name',
-            //     'multiple' => true, // Enables multi-select
-            //     'expanded' => true, // Set to true for checkboxes
-            //     'placeholder' => 'Select users',
-            //     'required' => true,
-            //     'attr' => [
-            //         'class' => 'form-control',                    
-            //     ],
-            // ]);
         ;
     }
 

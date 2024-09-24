@@ -34,16 +34,8 @@ class Task
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updated_at = null;
 
-    /**
-     * @var Collection<int, TaskAssignment>
-     */
-    #[ORM\OneToMany(targetEntity: TaskAssignment::class, mappedBy: 'task_id')]
-    private Collection $taskAssignments;
-
-    public function __construct()
-    {
-        $this->taskAssignments = new ArrayCollection();
-    }
+    #[ORM\OneToOne(mappedBy: 'task', orphanRemoval: true)]
+    private ?TaskAssignment $taskAssignment = null;    
 
     public function getId(): ?int
     {
@@ -110,32 +102,19 @@ class Task
         return $this;
     }
 
-    /**
-     * @return Collection<int, TaskAssignment>
-     */
-    public function getTaskAssignments(): Collection
+    public function getTaskAssignment(): ?TaskAssignment
     {
-        return $this->taskAssignments;
+        return $this->taskAssignment;
     }
 
-    public function addTaskAssignment(TaskAssignment $taskAssignment): static
+    public function setTaskAssignment(TaskAssignment $taskAssignment): static
     {
-        if (!$this->taskAssignments->contains($taskAssignment)) {
-            $this->taskAssignments->add($taskAssignment);
-            $taskAssignment->setTaskId($this);
+        // set the owning side of the relation if necessary
+        if ($taskAssignment->getTask() !== $this) {
+            $taskAssignment->setTask($this);
         }
 
-        return $this;
-    }
-
-    public function removeTaskAssignment(TaskAssignment $taskAssignment): static
-    {
-        if ($this->taskAssignments->removeElement($taskAssignment)) {
-            // set the owning side to null (unless already changed)
-            if ($taskAssignment->getTaskId() === $this) {
-                $taskAssignment->setTaskId(null);
-            }
-        }
+        $this->taskAssignment = $taskAssignment;
 
         return $this;
     }

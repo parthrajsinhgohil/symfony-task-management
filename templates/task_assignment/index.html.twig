@@ -23,8 +23,8 @@
 					{% for task_assignment in task_assignments %}
 						<tr>
 							<td>{{ task_assignment.id }}</td>
-							<td>{{ task_assignment.getTaskId.getTitle }}</td>
-							<td>{{ task_assignment.getUserId.getName }}</td>
+							<td>{{ task_assignment.getTask.getTitle }}</td>
+							<td>{{ task_assignment.getUser.getName }}</td>
 							<td>{{ task_assignment.createdAt ? task_assignment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 							<td>
 
