@@ -11,21 +11,22 @@ class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $user1 = new User();
-        $user1->setName('John Doe');
-        $user1->setEmail('john@example.com');
-        $user1->setCreatedAt(new \DateTimeImmutable());
-        $user1->setUpdatedAt(new \DateTime());
+        $names = [
+            'John Doe', 'Jane Smith', 'Alice Johnson', 'Bob Brown',
+            'Charlie Black', 'Diana Prince', 'Ethan Hunt', 'Fiona Apple',
+            'George Washington', 'Hannah Montana', 'Ivy League', 'Jack Daniels',
+            'Karen Gillan', 'Larry Page', 'Mona Lisa'
+        ];
 
-        $user2 = new User();
-        $user2->setName('Jane Smith');
-        $user2->setEmail('jane@example.com');
-        $user2->setCreatedAt(new \DateTimeImmutable());
-        $user2->setUpdatedAt(new \DateTime());
+        foreach ($names as $name) {
+            $user = new User();
+            $user->setName($name);
+            $user->setEmail(strtolower(str_replace(' ', '.', $name)) . '@example.com');
+            $user->setCreatedAt(new DateTimeImmutable());
+            $user->setUpdatedAt(new \DateTime());
 
-        $manager->persist($user1);
-        $manager->persist($user2);
-
+            $manager->persist($user);
+        }
         $manager->flush();
     }
 }
