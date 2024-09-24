@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator as CustomAssert;
 
 #[ORM\Entity(repositoryClass: TaskAssignmentRepository::class)]
 #[UniqueEntity(
@@ -23,6 +24,7 @@ class TaskAssignment
     #[ORM\OneToOne(inversedBy: 'taskAssignment')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank(message: 'Task cannot be blank.')]
+    #[CustomAssert\AssignedTask]
     private ?Task $task = null;
 
     #[ORM\ManyToOne(inversedBy: 'taskAssignments')]
