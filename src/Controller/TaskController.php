@@ -38,6 +38,7 @@ final class TaskController extends AbstractController
             $entityManager->persist($task);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Task Created Successfully.');
             return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -65,6 +66,7 @@ final class TaskController extends AbstractController
             $task->setUpdatedAt(new \DateTime());
             $entityManager->flush();
 
+            $this->addFlash('success', 'Task Updated Successfully.');
             return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -78,10 +80,19 @@ final class TaskController extends AbstractController
     public function delete(Request $request, Task $task, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$task->getId(), $request->getPayload()->getString('_token'))) {
+            // Check if the task has any assignments
+            $taskAssignment = $task->getTaskAssignment();
+                        
+            if ($taskAssignment) {
+                $this->addFlash('error', 'This Task cannot be deleted because it is assigned to User.');
+                return $this->redirectToRoute('app_task_index');
+            }
+        
             $entityManager->remove($task);
             $entityManager->flush();
         }
 
+        $this->addFlash('success', 'Task Deleted Successfully.');
         return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
     }
 

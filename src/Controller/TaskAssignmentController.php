@@ -37,6 +37,7 @@ final class TaskAssignmentController extends AbstractController
             $entityManager->persist($taskAssignment);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Task Assignment Created Successfully.');
             return $this->redirectToRoute('app_task_assignment_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -65,6 +66,7 @@ final class TaskAssignmentController extends AbstractController
             
             $entityManager->flush();
 
+            $this->addFlash('success', 'Task Assignment Updated Successfully.');
             return $this->redirectToRoute('app_task_assignment_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -82,6 +84,7 @@ final class TaskAssignmentController extends AbstractController
             $entityManager->flush();
         }
 
+        $this->addFlash('success', 'Task Assignment Deleted Successfully.');
         return $this->redirectToRoute('app_task_assignment_index', [], Response::HTTP_SEE_OTHER);
     }
 }
