@@ -1,6 +1,6 @@
 
-$(document).ready(function() {
-    $('.status-select').change(function() {
+$(function() {
+    $('.status-select').on('change', function() { 
         const taskId = $(this).data('task-id');
         const newStatus = $(this).val();
     

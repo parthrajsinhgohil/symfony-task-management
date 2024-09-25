@@ -74,8 +74,9 @@ class TaskAssignment
 
     public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
-        $this->created_at = $created_at;
-
+        if ($this->created_at === null) {
+            $this->created_at = $created_at;
+        }
         return $this;
     }
 
