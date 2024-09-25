@@ -16,6 +16,7 @@
 						<th>Task</th>
 						<th>User Name</th>
 						<th>Created Time</th>
+						<th>Updated Time</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -26,6 +27,7 @@
 							<td>{{ task_assignment.getTask.getTitle }}</td>
 							<td>{{ task_assignment.getUser.getName }}</td>
 							<td>{{ task_assignment.createdAt ? task_assignment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+							<td>{{ task_assignment.updatedAt ? task_assignment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 							<td>
 
 								<div class="">
